@@ -49,7 +49,7 @@ app.post('/auth', function(request, response) {
   }
 });
 
-//app.get('/teacherlogin', function(request, response) {
+// app.get('/teacherlogin', function(request, response) {
 //   if (request.session.loggedin) {
 //    response.send('Welcome back, ' + request.session.username + '!');
 //  } else {
