@@ -4,6 +4,8 @@ const app = express();
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('Bank.db');
 
+// This code needs more anime waifus
+
 //db.close();
 const path = require('path');
 
