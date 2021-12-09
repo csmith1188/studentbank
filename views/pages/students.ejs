@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" dir="donos">
+
+<head>
+  <meta charset="utf-8">
+  <title>Students</title>
+  <style>
+    h1 {text-align: center;}
+p {text-align: center;}
+div {
+  text-align: justify;
+  text-align-last: center;
+}
+</style>
+
+<!--<body style="background: url('https://coolbackgrounds.io/images/backgrounds/index/ranger-4df6c1b6.png');
+            background-repeat: no-repeat;
+            background-size: cover">-->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+  </head>
+
+  <body>
+
+    <body>
+      <h1>Students</h1>
+      <p><input type="button" onclick="location.href='http://localhost:5000/?';" value="Go Back" /></p>
+      <div>
+        <input type="checkbox" id="Student" name="Student" value="Student">
+        <label for="Student">Student</label>
+        <p><input type="button" onclick="location.href='http://localhost:5000/teachertransfer?';" value="Transer to Students" /></p>
+        <div>
+          <input type="button" onclick="location.href='http://localhost:5000/?';" value="Go Back" />
+          <%- JSON.stringify(rows) %>
+          <% for (let i = 0; i < rows.length; i++) { %>
+          <p>
+            <%- rows[i].name %>
+          </p>
+          <% } %>
+        </div>
+    </body>
+
+</html>
