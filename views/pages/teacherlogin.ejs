@@ -1,33 +1,50 @@
 <!DOCTYPE html>
-<html lang="en" dir="donos">
-  <head>
-    <meta charset="utf-8">
-    <title>Teacher Login</title>
-    <style>
-h1 {text-align: center;}
-p {text-align: center;}
-div {text-align: center;}
-</style>
-<!--<body style="background: url('https://coolbackgrounds.io/images/backgrounds/index/ranger-4df6c1b6.png');
-            background-repeat: no-repeat;
-            background-size: cover">-->
-   <link rel="stylesheet" href="css/style.css">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
-  </head>
-  <body>
-    <body>
-    <h1>Teacher Login</h1>
-    <div>
-      <form action="/Comments" method="post">
-        <input class="feedbackform" type="text" name="user" placeholder="Enter User name" value="">
-      <div class="commentspacing">
-        <input class="feedbackform" type="password" name="user" placeholder="Enter password" value="">
-      </div>
-      <div class="commentspacing">
-        <input type="button" onclick="location.href='http://localhost:5000/teacher?';" value="Enter"/>
-        <input type="button" onclick="location.href='http://localhost:5000/?';" value="Go Back" />
-      </div>
-      </form>
-    </div>
-  </body>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Teacher Login Form</title>
+		<style>
+		.login-form {
+			width: 300px;
+			margin: 0 auto;
+			font-family: Tahoma, Geneva, sans-serif;
+		}
+		.login-form h1 {
+			text-align: center;
+			color: #4d4d4d;
+			font-size: 24px;
+			padding: 20px 0 20px 0;
+		}
+		.login-form input[type="password"],
+		.login-form input[type="text"] {
+			width: 100%;
+			padding: 15px;
+			border: 1px solid #dddddd;
+			margin-bottom: 15px;
+			box-sizing:border-box;
+		}
+		.login-form input[type="submit"] {
+			width: 100%;
+			padding: 15px;
+			background-color: #535b63;
+			border: 0;
+			box-sizing: border-box;
+			cursor: pointer;
+			font-weight: bold;
+			color: #ffffff;
+		}
+		</style>
+	</head>
+	<body>
+		<div class="login-form">
+			<h1>Teacher Login Form</h1>
+			<form action="auth" method="POST">
+				<input type="text" name="username" placeholder="Username" required>
+				<input type="password" name="password" placeholder="Password" required>
+				<input type="submit" onclick="location.href='http://localhost:5000/teacheraccess?';" value="Submit"/>
+        <p></p>
+        <input type="submit" onclick="location.href='http://localhost:5000/?';" value="Go Back"/>
+			</form>
+		</div>
+	</body>
 </html>
