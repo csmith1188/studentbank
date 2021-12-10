@@ -1,13 +1,62 @@
 const express = require('express');
 const router = require('express').Router();
+var session = require('express-session');
 const app = express();
+var bodyParser = require('body-parser');
 var sqlite3 = require('sqlite3').verbose();
+var mysql = require('mysql');
 var db = new sqlite3.Database('Bank.db');
 
 //db.close();
 const path = require('path');
 
 const ejs = require('ejs');
+//Login
+var connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'nodelogin'
+});
+
+app.use(session({
+  secret: 'secret',
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
+
+app.post('/auth', function(request, response) {
+  var username = request.body.username;
+  var password = request.body.password;
+  if (username && password) {
+    connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
+      if (results.length > 0) {
+        request.session.loggedin = true;
+        request.session.username = username;
+        response.redirect('/teacherlogin');
+      } else {
+        response.send('Incorrect Username and/or Password!');
+      }
+      response.end();
+    });
+  } else {
+    response.send('Please enter Username and Password!');
+    response.end();
+  }
+});
+
+// app.get('/teacherlogin', function(request, response) {
+//   if (request.session.loggedin) {
+//    response.send('Welcome back, ' + request.session.username + '!');
+//  } else {
+//    response.send('Please login to view this page!');
+//  }
+//  response.end();
+// });
 
 app.set('views', path.join(__dirname, 'views'));
 
@@ -19,7 +68,11 @@ router.use(express.urlencoded({
 
 app.use(express.static('public'))
 
-app.get('/teacher', function(req, res) {
+app.get('/page', function(req, res) {
+  res.render('pages/page')
+});
+
+app.get('/teacheraccess', function(req, res) {
   res.render('pages/teacheraccess')
 });
 
