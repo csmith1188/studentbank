@@ -78,6 +78,10 @@ app.get('/teacheraccess', function(req, res) {
   res.render('pages/teacheraccess')
 });
 
+app.get('/sendFunds', function(req, res) {
+  res.render('pages/sendFunds')
+});
+
 app.get('/', function(req, res) {
   res.render('pages/or')
 });
