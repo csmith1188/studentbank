@@ -7,6 +7,8 @@ var sqlite3 = require('sqlite3').verbose();
 var mysql = require('mysql');
 var db = new sqlite3.Database('Bank.db');
 
+// This code needs more anime waifus
+
 //db.close();
 const path = require('path');
 
@@ -49,14 +51,14 @@ app.post('/auth', function(request, response) {
   }
 });
 
-// app.get('/teacherlogin', function(request, response) {
-//   if (request.session.loggedin) {
-//    response.send('Welcome back, ' + request.session.username + '!');
-//  } else {
-//    response.send('Please login to view this page!');
-//  }
-//  response.end();
-// });
+ app.get('/teacheraccess', function(request, response) {
+   if (request.session.loggedin) {
+    response.send('Welcome back, ' + request.session.username + '!');
+  } else {
+    response.send('Please login to view this page!');
+  }
+  response.end();
+ });
 
 app.set('views', path.join(__dirname, 'views'));
 
@@ -74,6 +76,10 @@ app.get('/page', function(req, res) {
 
 app.get('/teacheraccess', function(req, res) {
   res.render('pages/teacheraccess')
+});
+
+app.get('/sendFunds', function(req, res) {
+  res.render('pages/sendFunds')
 });
 
 app.get('/', function(req, res) {
