@@ -14,11 +14,11 @@ const path = require('path');
 
 const ejs = require('ejs');
 //Login
-var connection = mysql.createConnection({
+var connection = sqlite3.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'nodelogin'
+  database: 'logininfo'
 });
 
 app.use(session({
@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-app.post('/auth', function(request, response) {
+app.post('/teacherlogin', function(request, response) {
   var username = request.body.username;
   var password = request.body.password;
   if (username && password) {
@@ -39,7 +39,7 @@ app.post('/auth', function(request, response) {
       if (results.length > 0) {
         request.session.loggedin = true;
         request.session.username = username;
-        response.redirect('/teacherlogin');
+        response.redirect('/teacheraccess');
       } else {
         response.send('Incorrect Username and/or Password!');
       }
