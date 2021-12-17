@@ -3,9 +3,13 @@ const router = require('express').Router();
 var session = require('express-session');
 const app = express();
 var bodyParser = require('body-parser');
-var sqlite3 = require('sqlite3').verbose();
-var mysql = require('mysql');
-var db = new sqlite3.Database('Bank.db');
+var sqlite3 = require('sqlite3')
+var db = new sqlite3.Database('logininfo.db', sqlite3.OPEN_READONLY, (err) => {
+  if (err) {
+    return console.error(err.message);
+  }
+  console.log('Connected to Database');
+});
 
 // This code needs more anime waifus
 
@@ -14,12 +18,7 @@ const path = require('path');
 
 const ejs = require('ejs');
 //Login
-var connection = sqlite3.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'logininfo'
-});
+
 
 app.use(session({
   secret: 'secret',
@@ -35,11 +34,17 @@ app.post('/teacherlogin', function(request, response) {
   var username = request.body.username;
   var password = request.body.password;
   if (username && password) {
-    connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
+    db.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
       if (results.length > 0) {
         request.session.loggedin = true;
         request.session.username = username;
         response.redirect('/teacheraccess');
+        db.close((err) => {
+          if (err) {
+            return console.error(err.message);
+          }
+          console.log('Database closed connection');
+        });
       } else {
         response.send('Incorrect Username and/or Password!');
       }
@@ -51,14 +56,14 @@ app.post('/teacherlogin', function(request, response) {
   }
 });
 
- app.get('/teacheraccess', function(request, response) {
-   if (request.session.loggedin) {
+app.get('/teacheraccess', function(request, response) {
+  if (request.session.loggedin) {
     response.send('Welcome back, ' + request.session.username + '!');
   } else {
     response.send('Please login to view this page!');
   }
   response.end();
- });
+});
 
 app.set('views', path.join(__dirname, 'views'));
 
