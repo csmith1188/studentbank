@@ -1,1 +1,1 @@
-# studentbank
+This is the student bank, this will be used for mr.gaidos. We are using it for money, logins, and a bank.
