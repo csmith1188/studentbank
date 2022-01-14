@@ -88,7 +88,7 @@ app.get('/sendFunds', function(req, res) {
 });
 
 app.get('/', function(req, res) {
-  res.render('pages/or')
+  res.render('pages/studentlogin')
 });
 
 app.get('/studentlogin', function(req, res) {
